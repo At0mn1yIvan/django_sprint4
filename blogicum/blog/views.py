@@ -16,6 +16,8 @@ PAGE_PAGINATOR = 10
 
 
 class HomePage(ListView):
+    """Представление для главной страницы."""
+
     template_name = "blog/index.html"
     paginate_by = PAGE_PAGINATOR
     context_object_name = "posts"
@@ -46,6 +48,8 @@ class HomePage(ListView):
 
 
 class CategoryListView(ListView):
+    """Представление для списка категорий."""
+
     template_name = "blog/category.html"
     paginate_by = PAGE_PAGINATOR
 
@@ -80,6 +84,8 @@ class CategoryListView(ListView):
 
 
 class ProfileListView(ListView):
+    """Представление для профиля пользователя."""
+
     template_name = "blog/profile.html"
     paginate_by = PAGE_PAGINATOR
 
@@ -109,7 +115,7 @@ class ProfileListView(ListView):
 
 @login_required(login_url="/auth/login/")
 def edit_profile(request):
-    """Edit profile view."""
+    """Представление для редактирования профиля."""
     profile = request.user
 
     if request.method == "POST":
@@ -128,7 +134,7 @@ def edit_profile(request):
 
 
 def post_detail(request, post_id):
-    """Render post detail view."""
+    """Представление для детального отображения поста."""
     current_post = get_object_or_404(
         Post,
         pk=post_id,
@@ -157,7 +163,7 @@ def post_detail(request, post_id):
 
 @login_required(login_url="/auth/login/")
 def create_post(request, pk_post=None):
-    """Post creation/edit view."""
+    """Представление для создания и редактирования поста."""
     user = request.user
 
     if pk_post:
@@ -185,7 +191,7 @@ def create_post(request, pk_post=None):
 
 @login_required(login_url="/auth/login/")
 def delete_post(request, pk_post):
-    """Post deletion view."""
+    """Представление для удаления поста."""
     user = request.user
     instance = get_object_or_404(Post, pk=pk_post)
 
@@ -204,7 +210,7 @@ def delete_post(request, pk_post):
 
 @login_required(login_url="/auth/login/")
 def add_comment(request, post_id, comment_id=None):
-    """Handle comment creation or editing."""
+    """Представление для создания и редактирования комментария."""
     user = request.user
     post = get_object_or_404(Post, pk=post_id)
 
@@ -236,6 +242,7 @@ def add_comment(request, post_id, comment_id=None):
 
 @login_required(login_url="/auth/login/")
 def delete_comment(request, post_id, comment_id):
+    """Представление для удаления комментария."""
     user = request.user
     comment = get_object_or_404(Comment, pk=comment_id)
 

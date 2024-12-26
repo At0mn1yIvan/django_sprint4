@@ -6,6 +6,8 @@ User = get_user_model()
 
 
 class BaseModel(models.Model):
+    """Абстрактный класс модели для наследования общих полей."""
+
     is_published = models.BooleanField(
         default=True,
         verbose_name="Опубликовано",
@@ -20,6 +22,8 @@ class BaseModel(models.Model):
 
 
 class Category(BaseModel):
+    """Модель категории постов."""
+
     title = models.CharField("Заголовок", max_length=256)
     description = models.TextField("Описание")
     slug = models.SlugField(
@@ -40,6 +44,8 @@ class Category(BaseModel):
 
 
 class Location(BaseModel):
+    """Модель местоположения поста."""
+
     name = models.CharField("Название места", max_length=256)
 
     class Meta:
@@ -51,6 +57,8 @@ class Location(BaseModel):
 
 
 class Post(BaseModel):
+    """Модель поста."""
+
     title = models.CharField(verbose_name="Заголовок", max_length=256)
     text = models.TextField(verbose_name="Текст")
     pub_date = models.DateTimeField(
@@ -98,6 +106,8 @@ class Post(BaseModel):
 
 
 class Comment(models.Model):
+    """Модель комментария."""
+
     text = models.TextField(
         verbose_name='Текст',
     )
